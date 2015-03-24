@@ -41,7 +41,7 @@ if (args[0] == 'dev'){
     var port = 3010;
 } else {
     //Auth
-    app.use(basicAuth('worldwide', 'reach666'));
+    app.use(basicAuth('kawal', 'grover'));
 }
 // Config Envarioment
 app.set('port', port || process.env.PORT);
