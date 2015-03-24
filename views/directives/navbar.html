@@ -10,13 +10,19 @@
                 </button>
                 <a class="navbar-brand" href="#/">
                     <i class="fa fa-heart fa-2x"></i>
-                    <i class="fa fa-home fa-2x" ng-show="loggedIn"> Home</i>
+                    
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-left" ng-show="userOnline">
+                    <li><a ng-href="/login"><i class="fa fa-search fa-2x"> Find Sessions</i></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-show="!userOnline">
                     <li><a ng-href="/login"><i class="fa fa-user fa-2x"> Login</i></a></li>
                     <li><a ng-href="/register"><i class="fa fa-user-plus fa-2x"> Register</i></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-show="userOnline">
+                    <li><a ng-href="/home"><i class="fa fa-user fa-2x"> My Sessions</i></a></li>
                 </ul>
             </div>
         </div>

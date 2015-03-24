@@ -9,7 +9,7 @@ app.config(function (localStorageServiceProvider) {
 });
 
 //Controllers mudule
-angular.module('noBoundaries.controllers', ['imageupload']);
+angular.module('noBoundaries.controllers', []);
 //Services Module
 angular.module('noBoundaries.services', ['LocalStorageModule']);
 //Directives Module

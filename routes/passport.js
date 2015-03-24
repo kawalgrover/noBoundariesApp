@@ -1,22 +1,21 @@
-var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
 var keys = {
     'facebook' : {
-        'clientID'      : '1476459875938682', 
-        'clientSecret'  : '5b19539325791b68501a561a9c148cf2', 
+        'clientID'      : '660523004052804', 
+        'clientSecret'  : '6b9e37b8045b46d9cc68c51088846f29', 
         'callbackURL'   : 'http://localhost:3010/auth/facebook/callback'
     },
     'twitter' : {
-        'consumerKey'       : 'cZOtjJf7Ze1HtYzMN30iBtVDg',
-        'consumerSecret'    : 'SN98rqpFmJQKFzVsE6Y9MIy004jj086n4bwyYMzlRjwqE6sWgA',
+        'consumerKey'       : 'Z45cS51JKHYabEYKKu0y6EgEH',
+        'consumerSecret'    : 'MXXFOLSE4WQSBnU5seh3Lis5Y5WsEbS1IqtSiimPdPIVR7jLhl',
         'callbackURL'       : 'http://localhost:3010/auth/twitter/callback'
     },
     'google' : {
-        'clientID'      : '163346236403-ujs3p4q6gdm1nolvru9alu2jtqgqs922.apps.googleusercontent.com',
-        'clientSecret'  : 'vOLbMIuUEVSl2VcbGnDbg8mB',
+        'clientID'      : '738881702552-t7ta31oc68pf9ujljftteu4v7h6v71oh.apps.googleusercontent.com',
+        'clientSecret'  : 'wst49LrsAT0SGSa35j4cAeIf',
         'callbackURL'   : 'http://localhost:3010/auth/google/callback'
     }
 };
@@ -27,12 +26,6 @@ module.exports = function(passport,db,app,session,flash) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(flash()); 
-
-    app.post('/logUser', passport.authenticate('local-login', {
-        successRedirect : '/home',
-        failureRedirect : '/login',
-        failureFlash : true 
-    }));
 
     app.get('/auth/twitter', passport.authenticate('twitter', { scope : 'email' }));
     app.get('/auth/twitter/callback', 
@@ -73,70 +66,6 @@ module.exports = function(passport,db,app,session,flash) {
         });
     });
 
-    //Login
-    passport.use('local-login', new LocalStrategy({
-        usernameField : 'username',
-        passwordField : 'password',
-        passReqToCallback : true 
-    },
-    function(req, username, password, done) {
-        console.log("login local");
-        process.nextTick(function() {
-            if (req.user){
-                console.log(req.user);
-                req.logout();
-            }
-            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||req.connection.socket.remoteAddress;
-            if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(username)){
-                username.toLowerCase();
-                db.users.findOne({'mail.mail' : username, password : password}, {}, function (err, user) {
-                    if (err){
-                        return done(null, false, req.flash('loginMessage', 'Error.'));
-                    } else{
-                        if (!user){
-                            return done(null, false, req.flash('loginMessage', 'Error.'));
-                        }else{
-                            if (!user.mail.activated){
-                                return done(null, false, req.flash('loginMessage', 'Error.'));
-                            } else {
-                                user.loginLocal(ip);
-                                user.save(function (err) {
-                                    if(err) {
-                                        return done(null, false, req.flash('loginMessage', 'Error.'));
-                                    } else {
-                                        return done(null, user, req.flash('loginMessage', 'Success.'));
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
-            } else {
-                db.users.findOne({username : username, password : password}, {}, function (err, user) {
-                    if (err){
-                        return done(null, false, req.flash('loginMessage', 'Error.'));
-                    } else{
-                        if (!user){
-                            return done(null, false, req.flash('loginMessage', 'Error.'));
-                        }else{
-                            if (!user.mail.activated){
-                                return done(null, false, req.flash('loginMessage', 'Error.'));
-                            } else {
-                                user.loginLocal(ip);
-                                user.save(function (err) {
-                                    if(err) {
-                                        return done(null, false, req.flash('loginMessage', 'Error.'));
-                                    } else {
-                                        return done(null, user, req.flash('loginMessage', 'Success.'));
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    }));
 
     passport.use(new FacebookStrategy({
         clientID        : keys.facebook.clientID,
@@ -160,7 +89,16 @@ module.exports = function(passport,db,app,session,flash) {
                                 return done(null, user);
                         });
                     } else {
-                        return done(null, user);
+                        //Sign in
+                        var newUser = new db.users();
+                        newUser.create();
+                        newUser.signInFB(profile.id,profile.name.givenName + ' ' + profile.name.familyName,(profile.emails[0].value || '').toLowerCase(),token);
+                        newUser.save(function(err) {
+                            if (err)
+                                return done(err);
+                            else  
+                                return done(null, newUser);
+                        });
                     } 
                 });
             } else {
@@ -199,7 +137,16 @@ module.exports = function(passport,db,app,session,flash) {
                                 return done(null, user);
                         });
                     } else {
-                        return done(null, user);
+                        //Sign in
+                        var newUser = new db.users();
+                        newUser.create();
+                        newUser.signInTW(profile.id,profile.displayName,profile.username,token);
+                        newUser.save(function(err) {
+                            if (err)
+                                return done(err);
+                            else  
+                                return done(null, newUser);
+                        });
                     }
                 });
             } else {
@@ -234,8 +181,18 @@ module.exports = function(passport,db,app,session,flash) {
                         user.save(function(err) {
                             if (err)
                                 return done(err);
-                            else
-                                return done(null, user);
+                            else {
+                                //Sign in
+                                var newUser = new db.users();
+                                newUser.create();
+                                newUser.signInGG(profile.id,profile.name.givenName + ' ' + profile.name.familyName,(profile.emails[0].value || '').toLowerCase(),token);
+                                newUser.save(function(err) {
+                                    if (err)
+                                        return done(err);
+                                    else  
+                                        return done(null, newUser);
+                                });
+                            }
                         });
                     } 
                 });

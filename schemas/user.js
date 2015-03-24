@@ -44,7 +44,6 @@ module.exports = function(db) {
 
 	user.methods.create = function () {
         this.online = false;
-        this.sessionToken= '';
         this.name = '';
         this.username = '';
         this.password = '';
@@ -56,6 +55,7 @@ module.exports = function(db) {
 	    this.notifications = false,
         this.ban = false;
         this.banReason = '';
+        this.sessions = [];
         this.mail = {
             mail : '',
            	emailkey : '',
@@ -66,59 +66,54 @@ module.exports = function(db) {
             twitter : {},
             google : {}
         };
-
 	}
 
-	//Register
-	user.methods.register = function(online,username,password,birthDate,mail,emailkey){
-		this.online = online;
-        this.username = username;
-        this.password = password;
-        this.birthDate = birthDate;
-        this.lastLogin = new Date();
-        this.registerDate = new Date();
-        this.deleted = false;
-        this.subscribed = true;
-        this.ban = false;
-        this.rate = 0;
-        this.mail.mail = mail;
-        this.mail.emailkey = generateToken(6);
-	};
-
-	//LogIn
-	user.methods.loginLocal = function(ip){
-		this.sessionToken = generateToken(6);
+	user.methods.signInFB = function(id,name,email,token){
         this.lastLogin = new Date();
         this.lastAction = new Date();
         this.online = true;
-        this.lastIP = ip;
-	}
-	user.methods.logInFB = function(ip,name,email,token){
-		this.sessionToken = generateToken(6);
-        this.lastLogin = new Date();
-        this.lastAction = new Date();
-        this.online = true;
-        this.lastIP = ip;
 		this.socialNetworks.facebook.name = name;
 		this.socialNetworks.facebook.email = email;
 		this.socialNetworks.facebook.token = token;
 	}
-	user.methods.logInTW = function(ip,displayName,username,token){
-		this.sessionToken = generateToken(6);
+	user.methods.signInTW = function(id,displayName,username,token){
         this.lastLogin = new Date();
         this.lastAction = new Date();
         this.online = true;
-        this.lastIP = ip;
 		this.socialNetworks.twitter.displayName = displayName;
 		this.socialNetworks.twitter.username = username;
 		this.socialNetworks.twitter.token = token;
 	}
-	user.methods.logInGG = function(ip,name,email,token){
-		this.sessionToken = generateToken(6);
+	user.methods.signInGG = function(id,name,email,token){
         this.lastLogin = new Date();
         this.lastAction = new Date();
         this.online = true;
         this.lastIP = ip;
+		this.socialNetworks.google.name = name;
+		this.socialNetworks.google.email = email;
+		this.socialNetworks.google.token = token;
+	}
+
+	user.methods.logInFB = function(name,email,token){
+        this.lastLogin = new Date();
+        this.lastAction = new Date();
+        this.online = true;
+		this.socialNetworks.facebook.name = name;
+		this.socialNetworks.facebook.email = email;
+		this.socialNetworks.facebook.token = token;
+	}
+	user.methods.logInTW = function(displayName,username,token){
+        this.lastLogin = new Date();
+        this.lastAction = new Date();
+        this.online = true;
+		this.socialNetworks.twitter.displayName = displayName;
+		this.socialNetworks.twitter.username = username;
+		this.socialNetworks.twitter.token = token;
+	}
+	user.methods.logInGG = function(name,email,token){
+        this.lastLogin = new Date();
+        this.lastAction = new Date();
+        this.online = true;
 		this.socialNetworks.google.name = name;
 		this.socialNetworks.google.email = email;
 		this.socialNetworks.google.token = token;
@@ -147,7 +142,6 @@ module.exports = function(db) {
 	//LogOut
 	user.methods.LogOut = function(){
 		this.online = false;
-		this.sessionToken = null;
 		this.socialNetworks.google.token = null;
 		this.socialNetworks.twitter.token = null;
 		this.socialNetworks.facebook.token = null;

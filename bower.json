@@ -18,12 +18,9 @@
   "dependencies": {
     "jquery": "latest",
     "angular": "latest",
-    "angular-animate": "latest",
     "angular-route": "latest",
-    "jquery-validation": "latest",
     "bootstrap": "latest",
     "angular-local-storage": "latest",
-    "bitcore": "latest",
     "font-awesome": "~4.3.0",
     "moment": "~2.9.0"
   }

@@ -2,7 +2,6 @@
 var express = require('express');
 var session = require('express-session');
 var helmet = require('helmet');
-var favicon = require('serve-favicon');
 var path = require('path');
 var multipart = require('connect-multiparty');
 //Parsers
@@ -18,8 +17,6 @@ var basicAuth = require('basic-auth-connect');
 // Mongo
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-//Bitcore
-var bitcore = require("bitcore");
 //Passport
 var passport = require('passport')
 var flash = require('connect-flash');
@@ -48,7 +45,6 @@ app.set('port', port || process.env.PORT);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.use(favicon(__dirname + '/public/img/seed.ico'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());  

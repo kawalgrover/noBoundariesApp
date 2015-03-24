@@ -1,8 +1,8 @@
 {
-  "name": "MEANSeedApp",
+  "name": "NoBounderiesApp",
   "version": "0.0.1",
   "private": true,
-  "description": "MEAN Seed Aplication for develop aplications faster and easier",
+  "description": "No Bounderies app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -15,13 +15,10 @@
     "basic-auth-connect": "latest",
     "request": "latest",
     "connect-multiparty": "latest",
-    "debug": "latest",
     "mongoose": "latest",
     "mongodb": "latest",
     "ejs": "1.0.0",
     "express-mailer": "latest",
-    "crypto-js": "latest",
-    "bitcore": "latest",
     "socket.io-client": "latest",
     "passport": "latest",
     "connect-flash": "latest",
@@ -30,14 +27,14 @@
     "passport-twitter": "latest",
     "passport-google": "latest",
     "passport-google-oauth": "latest",
-    "passport-local": "latest",
-    "helmet": "latest"
+    "helmet": "latest",
+    "colors": "~1.0.3"
   },
   "engines": {
     "node": "0.10.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/cryptuse/cryptuseapp"
+    "url": "https://github.com/kawalgrover/noBoundariesApp"
   }
 }

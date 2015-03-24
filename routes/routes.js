@@ -10,12 +10,12 @@ module.exports = function(logger,db,app,multipartMiddleware){
     module.addRoutes = function(){
         //Index, partials and directives
         app.get('/', module.index);
-        app.get('/home', module.index);
         app.get('/login', module.index);
         app.get('/register', module.index);
         app.get('/partials/:name',module.partials);
         app.get('/directives/:name',module.directives);
-        app.get('/mySessions',module.requestNeedAuth, module.mySessions);
+        app.get('/home',module.viewNeedAuth, module.index);
+        app.get('/myUser',module.requestNeedAuth, module.myUser);
         //Sitemap
         app.get('/sitemap.xml', module.sitemap);
     }
@@ -70,8 +70,8 @@ module.exports = function(logger,db,app,multipartMiddleware){
         res.send(xml); 
     }
 
-    module.mySessions = function(req,res){
-        res.json(req.user.sessions);
+    module.myUser = function(req,res){
+        res.json(req.user);
     }
 
     return module;

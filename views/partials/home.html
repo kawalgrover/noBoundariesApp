@@ -1,10 +1,10 @@
 <div class="container-fluid">
 	<div class="row row-home text-center">
 		<div class="jumbotron home-panel">
-			<div id="content-panel">
+			<div id="content-panel" ng-model="user">
 				<h2 class="no-margin">My Events</h2>
-				<div class="row row-margin" ng-repeat="event in events">
-		            
+				<div class="row row-margin" ng-repeat="session in user.sessions">
+		            {{session}}
 				</div>
 			</div>
 		</div>
