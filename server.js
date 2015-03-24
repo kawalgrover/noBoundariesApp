@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 /////////////////////////////////////// DATABASE ///////////////////////////////////////
 
-mongoose.connect('mongodb://admin:admin@ds053190.mongolab.com:53190/couplingio');
+mongoose.connect('mongodb://admin:admin@ds035127.mongolab.com:35127/noboundaries');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
