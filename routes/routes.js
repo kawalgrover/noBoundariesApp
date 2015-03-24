@@ -10,8 +10,12 @@ module.exports = function(logger,db,app,multipartMiddleware){
     module.addRoutes = function(){
         //Index, partials and directives
         app.get('/', module.index);
-        app.get('/partials/:name',module.partialsUse);
+        app.get('/home', module.index);
+        app.get('/login', module.index);
+        app.get('/register', module.index);
+        app.get('/partials/:name',module.partials);
         app.get('/directives/:name',module.directives);
+        app.get('/mySessions',module.requestNeedAuth, module.mySessions);
         //Sitemap
         app.get('/sitemap.xml', module.sitemap);
     }
@@ -20,7 +24,7 @@ module.exports = function(logger,db,app,multipartMiddleware){
         res.render('index.html');
     };
 
-    module.partialsUse = function(req,res){
+    module.partials = function(req,res){
         res.render('partials/' + req.params.name);
     };
 
@@ -64,6 +68,10 @@ module.exports = function(logger,db,app,multipartMiddleware){
         xml += '</urlset>';
         res.header('Content-Type', 'text/xml');
         res.send(xml); 
+    }
+
+    module.mySessions = function(req,res){
+        res.json(req.user.sessions);
     }
 
     return module;

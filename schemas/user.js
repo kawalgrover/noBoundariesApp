@@ -9,6 +9,7 @@ module.exports = function(db) {
 	    birthDate : String,
 	    gender : String,
 	    registerDate : Date,
+	    sessions : [String],
 	    mail : {
             mail : String,
             emailkey : String,
@@ -161,5 +162,5 @@ module.exports = function(db) {
 	}
 
 	//USERS COLLECTION
-	db.usersCollection = db.model('userscollection', user);
+	db.users = db.model('users', user);
 }

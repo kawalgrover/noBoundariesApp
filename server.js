@@ -57,22 +57,22 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 /////////////////////////////////////// DATABASE ///////////////////////////////////////
 
-mongoose.connect('mongodb://127.0.0.1:27017/noboundaries');
+mongoose.connect('mongodb://admin:admin@ds053190.mongolab.com:53190/couplingio');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
     console.log('Connected to NoBoundaries DB !');
-    require('./update').updateDB(logger,db);
+    //require('./update').updateDB(logger,db);
 });
 
 /////////////////////////////////////// MAILER ///////////////////////////////////////
 
 mailer.extend(app, {
   from: 'no-reply@example.com',
-  host: 'smtp.gmail.com', // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  host: 'smtp.gmail.com', 
+  secureConnection: true, 
+  port: 465, 
+  transportMethod: 'SMTP', 
   auth: {
     user: 'contact@prvider.com',
     pass: 'pass'
@@ -82,7 +82,7 @@ mailer.extend(app, {
 /////////////////////////////////////// SCHEMAS ///////////////////////////////////////
 
 require('./schemas/user')(db);
-require('./schemas/btcinfo')(db);
+require('./schemas/event')(db);
 
 /////////////////////////////////////// REQUEST AND RESPONSE ///////////////////////////////////////
 

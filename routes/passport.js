@@ -12,18 +12,18 @@ var keys = {
     'twitter' : {
         'consumerKey'       : 'cZOtjJf7Ze1HtYzMN30iBtVDg',
         'consumerSecret'    : 'SN98rqpFmJQKFzVsE6Y9MIy004jj086n4bwyYMzlRjwqE6sWgA',
-        'callbackURL'       : 'http://localhost:3006/auth/twitter/callback'
+        'callbackURL'       : 'http://localhost:3010/auth/twitter/callback'
     },
     'google' : {
         'clientID'      : '163346236403-ujs3p4q6gdm1nolvru9alu2jtqgqs922.apps.googleusercontent.com',
         'clientSecret'  : 'vOLbMIuUEVSl2VcbGnDbg8mB',
-        'callbackURL'   : 'http://localhost:3006/auth/google/callback'
+        'callbackURL'   : 'http://localhost:3010/auth/google/callback'
     }
 };
 
 module.exports = function(passport,db,app,session,flash) {
 
-    app.use(session({ secret: 'seedApp666'}));
+    app.use(session({ secret: 'noBoundadires666'}));
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(flash()); 
@@ -68,7 +68,7 @@ module.exports = function(passport,db,app,session,flash) {
         done(null, user.id);
     });
     passport.deserializeUser(function(id, done) {
-        db.usersCollection.findById(id, function(err, user) {
+        db.users.findById(id, function(err, user) {
             done(err, user);
         });
     });
@@ -89,7 +89,7 @@ module.exports = function(passport,db,app,session,flash) {
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||req.connection.socket.remoteAddress;
             if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(username)){
                 username.toLowerCase();
-                db.usersCollection.findOne({'mail.mail' : username, password : password}, {}, function (err, user) {
+                db.users.findOne({'mail.mail' : username, password : password}, {}, function (err, user) {
                     if (err){
                         return done(null, false, req.flash('loginMessage', 'Error.'));
                     } else{
@@ -112,7 +112,7 @@ module.exports = function(passport,db,app,session,flash) {
                     }
                 });
             } else {
-                db.usersCollection.findOne({username : username, password : password}, {}, function (err, user) {
+                db.users.findOne({username : username, password : password}, {}, function (err, user) {
                     if (err){
                         return done(null, false, req.flash('loginMessage', 'Error.'));
                     } else{
@@ -148,7 +148,7 @@ module.exports = function(passport,db,app,session,flash) {
         process.nextTick(function() {
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||req.connection.socket.remoteAddress;
             if (!req.user) {
-                db.usersCollection.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+                db.users.findOne({ 'facebook.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
                     else if ((user) && (!user.facebook.token)) {
@@ -187,7 +187,7 @@ module.exports = function(passport,db,app,session,flash) {
         process.nextTick(function() {
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||req.connection.socket.remoteAddress;
             if (!req.user) {
-                db.usersCollection.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+                db.users.findOne({ 'twitter.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
                     else if ((user) && (!user.twitter.token)) {
@@ -226,7 +226,7 @@ module.exports = function(passport,db,app,session,flash) {
         process.nextTick(function() {
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||req.connection.socket.remoteAddress;
             if (!req.user) {
-                db.usersCollection.findOne({ 'google.id' : profile.id }, function(err, user) {
+                db.users.findOne({ 'google.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
                     else if ((user) && (!user.google.token)) {
