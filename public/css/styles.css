@@ -1,0 +1,244 @@
+body {
+  background: url(/img/NoBoundariesWeb-2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: FontAwesome;
+  /*margin bottom for foofter */
+  margin-bottom: 33px;
+}
+
+/* BOX */
+.box {
+  background-color: #F7FEFF;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  padding: 15px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  display: block;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  color: #BCB638;
+  border: 0px solid transparent;
+  background-color: #FAFAEF;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+.body > .container{
+  padding-top: 30px;
+}
+
+/* FOOTER */
+footer {
+  position: absolute;
+  bottom: 0;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  width: 100%;
+  height: 40px;
+  padding-top: 10px;
+  background-color: #F6F5E0;
+}
+.data-footer{
+  margin-top: 10px;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+.location-footer{
+  margin-right: 8px;
+}
+.copyright{
+  margin-left: 8px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+}
+
+.row-home{
+  position: absolute;
+  top: 30%;
+  width: 100%;
+}
+
+.row-margin{
+  margin-top: 10px;
+}
+.no-margin{
+  margin: 0px;
+}
+
+.home-panel{
+  width:370px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  opacity: 0.95;
+}
+.contact-panel{
+  width:450px;
+}
+.event-panel{
+  width:450px;
+}
+
+.text-contact{
+  resize:vertical; 
+  max-height:200px; 
+  min-height:100px;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+
+#location{
+  cursor: pointer;
+}
+#map-content{
+  display: none;
+}
+.map{
+  width: 100%;
+  height: 250px;
+}
+.fa.pull-right {
+    margin-left: 0.1em;   
+}
+
+.date-picker,
+.date-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    color: rgb(75, 77, 78);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.date{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.weekday{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.date-container {
+    padding: 0px 40px;   
+}
+.date-picker h2, .date-picker h4 {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+.date-container .date {
+    text-align: center;
+}
+.date-picker span.fa {
+    position: absolute;
+    font-size: 4em;
+    font-weight: 100;
+    padding: 8px 0px 7px;
+    cursor: pointer;
+    top: 0px;
+}
+.date-picker span.fa[data-type="subtract"] {
+    left: 0px;
+}
+.date-picker span.fa[data-type="add"] {
+    right: 0px;
+}
+.date-picker span[data-toggle="calendar"] {
+    display: block;
+    position: absolute;
+    top: -7px;
+    right: 45px;
+    font-size: 1em !important;
+    cursor: pointer;
+}
+
+.date-picker .input-datepicker {
+    display: none;
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    width:100%;
+}
+.date-picker .input-datepicker.show-input {
+    display: table;
+}
+
+@media (min-width: 768px) and (max-width: 1010px) {
+    .date-picker h2{
+        font-size: 1.5em; 
+        font-weight: 400;  
+    }    
+    .date-picker h4 {
+        font-size: 1.1em;
+    }  
+    .date-picker span.fa {
+        font-size: 3em;
+    } 
+}
+
+.radio + .radio, .checkbox + .checkbox {
+    margin-top: 10px;
+}
+

@@ -1,0 +1,43 @@
+{
+  "name": "MEANSeedApp",
+  "version": "0.0.1",
+  "private": true,
+  "description": "MEAN Seed Aplication for develop aplications faster and easier",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.2.0",
+    "static-favicon": "latest",
+    "cookie-parser": "latest",
+    "body-parser": "latest",
+    "basic-auth-connect": "latest",
+    "request": "latest",
+    "connect-multiparty": "latest",
+    "debug": "latest",
+    "mongoose": "latest",
+    "mongodb": "latest",
+    "ejs": "1.0.0",
+    "express-mailer": "latest",
+    "crypto-js": "latest",
+    "bitcore": "latest",
+    "socket.io-client": "latest",
+    "passport": "latest",
+    "connect-flash": "latest",
+    "express-session": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-google": "latest",
+    "passport-google-oauth": "latest",
+    "passport-local": "latest",
+    "helmet": "latest"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/cryptuse/cryptuseapp"
+  }
+}

@@ -1,0 +1,26 @@
+<a class="btn btn-primary" href="/#/create/registration"><span class="glyphicon glyphicon-plus"></span> New Registration</a>
+<br>
+
+<table class="table table-striped">
+<thead>
+    <th>Session</th>
+    <th>Time</th>
+    <th>Operations</th>
+</thead>
+<tbody>
+    <tr ng-repeat="registration in registrations">
+        <td><a ng-href="/#/register/{{registration._id}}"> {{ registration.therapy }} </a></td>
+        <td>{{ registration.appointment }} </td>
+        <td>
+            <div class="button-group">
+                <a ng-href="/#/register/{{registration._id}}/edit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a ng-href="/#/register/{{registration._id}}/delete" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </a>
+            </div>
+        </td>
+    </tr>
+</tbody>
+</table>

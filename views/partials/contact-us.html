@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row row-home text-center">
+    <div class="jumbotron home-panel contact-panel">
+      <div id="content-panel">
+        <form role="form">
+          <div class="form-group">
+            <input type="text" class="form-control" id="name" placeholder="Name" ng-model="contact.name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="email" placeholder="Email" ng-model="contact.email">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="subject" placeholder="Subject" ng-model="contact.subject">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control text-contact" id="description" placeholder="Message" ng-model="contact.description"></textarea>
+          </div>
+          <button type="submit" class="btn btn-default" ng-click="saveFeedback()">Submit</button>
+        </form>
+      </div>
+      <div id="map-content">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3302.145362238168!2d-84.24893999999999!3d34.14262300000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59da29fd4505d%3A0x87a5e5171b8d5499!2s1755+Grassland+Pkwy%2C+Alpharetta%2C+GA+30004%2C+EE.+UU.!5e0!3m2!1ses!2sar!4v1426858596791" class="map" frameborder="0" style="border:0"></iframe>
+        <div class="row text-center">
+          <div type="button" class="btn btn-sm btn-default" id="back">Go Back</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

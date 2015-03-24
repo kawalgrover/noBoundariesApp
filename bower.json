@@ -1,0 +1,30 @@
+{
+  "name": "MEANSeedApp",
+  "version": "1.0",
+  "authors": [
+    "AugustoL <augusto.lemble@gmail.com>"
+  ],
+  "main": "node server.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "angular": "latest",
+    "angular-animate": "latest",
+    "angular-route": "latest",
+    "jquery-validation": "latest",
+    "bootstrap": "latest",
+    "angular-local-storage": "latest",
+    "bitcore": "latest",
+    "font-awesome": "~4.3.0",
+    "moment": "~2.9.0"
+  }
+}
